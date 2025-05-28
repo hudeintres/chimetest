@@ -1,6 +1,51 @@
-# README - React Meeting Demo
+## Architecture Overview
+This is a React-based video conferencing application built on AWS Chime SDK. It follows a client-server architecture:
 
-This is the SDK react meeting demo app. It shows how to use the Amazon Chime SDK and Chime SDK UI Component Library to build a react meeting app. Since it incorporates Amazon Voice Focus feature, please make sure your device meets the minimum requirement based on [Browser compatibility](https://github.com/aws/amazon-chime-sdk-js/blob/master/guides/09_Amazon_Voice_Focus.md#browser-compatibility). If you want to use premium feature like Amazon Chime Echo Reduction, the aws-sdk version is required to be at least 2.1034.0.
+Frontend: React SPA with TypeScript
+Backend: Express.js server that interfaces with AWS Chime SDK
+Infrastructure: Optional serverless deployment using AWS Lambda/API Gateway
+
+## Directory Structure
+### Root Level
+`server.js` - Express server that handles meeting creation/management via AWS Chime SDK
+`webpack.config.js` - Webpack configuration for development and production builds
+`package.json` - Project dependencies and scripts
+`tsconfig.json` - TypeScript configuration
+
+### `/src` - Main Application Code
+#### `/src/views` - Page Components
+`Home/` - Landing page with meeting join form
+`DeviceSetup/` - Audio/video device configuration before joining
+`Meeting/` - Main meeting interface with video grid and controls
+#### `/src/containers` - Smart Components
+`MeetingForm/` - Meeting creation/join form logic
+`MeetingControls/` - Meeting control bar (mute, video, screen share, etc.)
+`MeetingProviderWrapper/` - Main context provider wrapper
+`Navigation/` - Side navigation (roster, chat)
+`Chat/` - In-meeting chat functionality
+`DevicePermissionControl/` - Browser permission handling
+#### `/src/components` - Presentational Components
+`VideoTileGrid/` - Video grid layout for participants
+`DeviceSelection/` - Device picker components
+`Card/`, `ActivityBar/` - UI components
+`icons/` - Custom icon components
+#### `/src/providers` - Context Providers
+`AppStateProvider` - Global app state management
+`NavigationProvider` - Navigation state (sidebar visibility)
+`VideoTileGridProvider` - Video grid state management
+`DataMessagesProvider` - Real-time messaging
+`ErrorProvider` - Error handling context
+`SIPMeetingProvider` - SIP meeting support
+#### `/src/utils` - Utilities
+`api.ts` - API calls to backend server
+`background-replacement.ts` - Video background effects
+Various helper functions
+#### `/serverless` - AWS Deployment
+CloudFormation templates
+Lambda function handlers
+Deployment scripts
+#### `/app` - Static Assets
+`meeting.html` - Meeting page template
 
 ## To run the demo app locally:
 
